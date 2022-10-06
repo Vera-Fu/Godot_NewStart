@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/House In a Forest Loop.ogg-f54a90fcba50b4434ecc5ede4ebdb245.oggstr"
+
+[deps]
+
+source_file="res://first 2D game/art/House In a Forest Loop.ogg"
+dest_files=[ "res://.import/House In a Forest Loop.ogg-f54a90fcba50b4434ecc5ede4ebdb245.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
