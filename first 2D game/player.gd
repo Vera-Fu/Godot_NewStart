@@ -40,6 +40,7 @@ func _process(delta):
 		$AnimatedSprite.animation = "up"
 		$AnimatedSprite.flip_h = false
 		$AnimatedSprite.flip_v = velocity.y > 0
+		
 
 
 func _on_Player_body_entered(body):
