@@ -1,0 +1,216 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Platform/Scripts/Slime.gd" type="Script" id=1]
+[ext_resource path="res://Platform/Scene/Enemies/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Platform/Asset/Sounds/squish.wav" type="AudioStream" id=3]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 15.5, 8.5 )
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+
+[sub_resource type="Animation" id=6]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 52 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HurtBox:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HitBox:monitoring")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath(".:is_dead")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "audio"
+tracks/6/path = NodePath("DeathSound")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "move"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 48, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HitBox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HurtBox:monitorable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:is_dead")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 24.7351, 5.36327 )
+
+[sub_resource type="CapsuleShape2D" id=4]
+
+[node name="Slime" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+is_dead = true
+direction = -1
+
+[node name="Sprite" parent="." index="0"]
+frame = 52
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( -0.5, 22.5 )
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" parent="." index="2"]
+autoplay = "move"
+anims/RESET = SubResource( 7 )
+anims/death = SubResource( 6 )
+anims/move = SubResource( 2 )
+
+[node name="HurtBox" parent="." index="3"]
+position = Vector2( 0, 8 )
+scale = Vector2( 1.10185, 0.644548 )
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( -3.24571e-07, 3.10295 )
+scale = Vector2( 0.953976, 0.541855 )
+shape = SubResource( 5 )
+
+[node name="HitBox" parent="." index="4"]
+position = Vector2( 0, 23 )
+monitoring = false
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+rotation = 1.5708
+scale = Vector2( 0.88, 1.25939 )
+shape = SubResource( 4 )
+
+[node name="DeathSound" parent="." index="5"]
+stream = ExtResource( 3 )
+
+[editable path="HurtBox"]
+[editable path="HitBox"]
