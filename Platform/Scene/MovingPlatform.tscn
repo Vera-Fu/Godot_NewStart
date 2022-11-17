@@ -7,7 +7,7 @@ extents = Vector2( 64, 24 )
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -176 )
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -360 )
 }
 
 [sub_resource type="Animation" id=3]

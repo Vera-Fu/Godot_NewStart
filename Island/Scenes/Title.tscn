@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Platform/Theme/title_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Island/Assets/UI/title_screen.png" type="Texture" id=2]
+[ext_resource path="res://Island/Scenes/title.gd" type="Script" id=3]
+
+[node name="TitleBackground" type="TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource( 1 )
+custom_constants/separation = 32
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+margin_right = 308.0
+margin_bottom = 117.921
+text = "新游戏"
+
+[node name="Load" type="Button" parent="VBoxContainer"]
+margin_top = 149.0
+margin_right = 308.793
+margin_bottom = 266.921
+text = "加载游戏"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+margin_top = 298.0
+margin_right = 308.793
+margin_bottom = 415.921
+text = "退出游戏"
+
+[connection signal="tree_exited" from="." to="." method="_on_TitleBackground_tree_exited"]
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Load" to="." method="_on_Load_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

@@ -1,0 +1,16 @@
+extends CanvasLayer
+
+onready var coin_label = $HBoxContainer/CoinQty
+onready var pause_menu = $PauseMenu
+
+func _ready():
+	WorldManager.connect("coins_changed", self, "_on_coins_changed")
+	_on_coins_changed()
+
+
+func _on_coins_changed():
+	coin_label.text = str(WorldManager.get_coins())
+
+
+func _on_TextureButton_pressed():
+	pause_menu.show_menu()

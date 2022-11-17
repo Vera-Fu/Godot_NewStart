@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/OpenRoad.mp3-cc6add631f088d0dd6bf387e342af629.mp3str"
+
+[deps]
+
+source_file="res://Island/Assets/Music/OpenRoad.mp3"
+dest_files=[ "res://.import/OpenRoad.mp3-cc6add631f088d0dd6bf387e342af629.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

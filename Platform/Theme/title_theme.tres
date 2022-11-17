@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=5 format=2]
+
+[ext_resource path="res://Island/UI/default_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Island/Assets/UI/title_button.png" type="Texture" id=2]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 340, 140 )
+margin_left = 52.7927
+margin_right = 48.0
+margin_top = 30.0
+margin_bottom = 31.9212
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[resource]
+default_font = ExtResource( 1 )
+Button/styles/disabled = SubResource( 1 )
+Button/styles/focus = SubResource( 2 )
+Button/styles/hover = SubResource( 1 )
+Button/styles/normal = SubResource( 1 )
+Button/styles/pressed = SubResource( 1 )

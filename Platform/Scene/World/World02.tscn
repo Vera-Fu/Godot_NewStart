@@ -1,0 +1,136 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Platform/Scene/Enemies/Fly.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Platform/Scene/Exit.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Platform/Scene/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Platform/Scene/MovingPlatform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Platform/Scene/Coin.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Platform/Scene/World/world.gd" type="Script" id=6]
+[ext_resource path="res://Platform/Scene/World/World.tres" type="TileSet" id=7]
+[ext_resource path="res://Platform/Asset/Sprites/light.png" type="Texture" id=8]
+[ext_resource path="res://Platform/Scene/NightBackground.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Platform/Scene/Enemies/Slime.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Platform/Scene/HitBox.tscn" type="PackedScene" id=12]
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, -160 )
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "default"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[node name="World" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 7 )
+format = 1
+tile_data = PoolIntArray( -65544, 0, 0, -8, 1, 0, 65528, 1, 0, 8, 0, 0, 131064, 1, 0, 65544, 1, 0, 196600, 1, 0, 262136, 1, 0, 196615, 0, 0, 196616, 0, 0, 196624, 0, 0, 196625, 0, 0, 196626, 0, 0, 196627, 0, 0, 196628, 0, 0, 196629, 0, 0, 327672, 1, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262160, 1, 0, 262161, 1, 0, 262162, 1, 0, 262163, 1, 0, 262164, 1, 0, 262165, 1, 0, 393208, 1, 0, 327696, 1, 0, 327697, 1, 0, 327698, 1, 0, 327699, 1, 0, 327700, 1, 0, 327701, 1, 0, 458744, 1, 0, 393232, 1, 0, 393233, 1, 0, 393234, 1, 0, 393235, 1, 0, 393236, 1, 0, 393237, 1, 0, 524280, 1, 0, 524281, 0, 0, 524282, 0, 0, 524283, 0, 0, 524284, 0, 0, 524285, 0, 0, 524286, 0, 0, 524287, 0, 0, 458752, 0, 0, 458753, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 458772, 1, 0, 458773, 1, 0, 589816, 1, 0, 589817, 1, 0, 589818, 1, 0, 589819, 1, 0, 589820, 1, 0, 589821, 1, 0, 589822, 1, 0, 589823, 1, 0, 524288, 1, 0, 524289, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0, 524295, 1, 0, 524296, 1, 0, 524297, 1, 0, 524298, 1, 0, 524299, 1, 0, 524300, 1, 0, 524301, 1, 0, 524302, 1, 0, 524303, 1, 0, 524304, 1, 0, 524305, 1, 0, 524306, 1, 0, 524307, 1, 0, 524308, 1, 0, 524309, 1, 0 )
+
+[node name="MovingPlatform" parent="TileMap" instance=ExtResource( 4 )]
+position = Vector2( 192, 432 )
+
+[node name="MovingPlatform2" parent="TileMap" instance=ExtResource( 4 )]
+position = Vector2( 640, 224 )
+
+[node name="Path2D" parent="TileMap/MovingPlatform2" index="1"]
+curve = SubResource( 4 )
+
+[node name="AnimationPlayer" parent="TileMap/MovingPlatform2" index="2"]
+anims/RESET = SubResource( 5 )
+anims/default = SubResource( 6 )
+
+[node name="NightBackground" parent="." instance=ExtResource( 9 )]
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 48, 400 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+limit_bottom = 576
+limit_smoothed = true
+
+[node name="Light2D" type="Light2D" parent="Player"]
+position = Vector2( 0, 12 )
+texture = ExtResource( 8 )
+texture_scale = 3.0
+energy = 0.9
+
+[node name="Coin6" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coin6" instance=ExtResource( 5 )]
+position = Vector2( 320, 248 )
+
+[node name="Coin2" parent="Coin6" instance=ExtResource( 5 )]
+position = Vector2( 520, 384 )
+
+[node name="Coin3" parent="Coin6" instance=ExtResource( 5 )]
+position = Vector2( 688, 392 )
+
+[node name="Coin4" parent="Coin6" instance=ExtResource( 5 )]
+position = Vector2( 1032, 128 )
+
+[node name="Coin5" parent="Coin6" instance=ExtResource( 5 )]
+position = Vector2( 752, 112 )
+
+[node name="Coin6" parent="Coin6" instance=ExtResource( 5 )]
+position = Vector2( 544, -40 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Slime" parent="Enemies" instance=ExtResource( 11 )]
+position = Vector2( -240, 360 )
+direction = 1
+
+[node name="Slime2" parent="Enemies" instance=ExtResource( 11 )]
+position = Vector2( -368, 360 )
+
+[node name="Slime3" parent="Enemies" instance=ExtResource( 11 )]
+position = Vector2( 968, 393 )
+
+[node name="Fly" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 344, 304 )
+
+[node name="Exit" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1376, 192 )
+
+[node name="HitBox" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1376, 192 )
+collision_layer = 0
+collision_mask = 24
+instant_kill = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0, 0, 0, 1 )
+
+[editable path="TileMap/MovingPlatform2"]

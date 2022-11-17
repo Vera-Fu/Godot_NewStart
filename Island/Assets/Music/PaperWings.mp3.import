@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PaperWings.mp3-d4517c1821586d74f413ceeb846034ce.mp3str"
+
+[deps]
+
+source_file="res://Island/Assets/Music/PaperWings.mp3"
+dest_files=[ "res://.import/PaperWings.mp3-d4517c1821586d74f413ceeb846034ce.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

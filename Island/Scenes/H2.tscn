@@ -1,0 +1,93 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Island/Assets/H2/H2.png" type="Texture" id=1]
+[ext_resource path="res://Island/Scenes/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Island/Objects/teleporter.gd" type="Script" id=3]
+[ext_resource path="res://Island/Scenes/H2.gd" type="Script" id=4]
+[ext_resource path="res://Island/UI/DialogueBubble.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Island/Objects/interactable.gd" type="Script" id=6]
+[ext_resource path="res://Island/Objects/scene_item.gd" type="Script" id=7]
+[ext_resource path="res://Island/Items/key.tres" type="Resource" id=8]
+[ext_resource path="res://Island/Assets/H2/key.png" type="Texture" id=9]
+[ext_resource path="res://flag_switch.gd" type="Script" id=10]
+[ext_resource path="res://Island/Assets/H2/door.png" type="Texture" id=11]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 47.5, 37.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 100, 182.75 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 64, 48 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 28, 244 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 148, 296 )
+
+[node name="H2" instance=ExtResource( 2 )]
+texture = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="ToH1" type="Area2D" parent="." index="0"]
+script = ExtResource( 3 )
+target_path = "res://Island/Scenes/H1.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToH1" index="0"]
+position = Vector2( -671.5, -329.5 )
+shape = SubResource( 1 )
+
+[node name="FlagSwitch" type="Node2D" parent="." index="1"]
+script = ExtResource( 10 )
+flag = "h2a_unlocked"
+
+[node name="ToH2A" type="Area2D" parent="FlagSwitch" index="0"]
+position = Vector2( 16, -219 )
+script = ExtResource( 3 )
+texture = ExtResource( 11 )
+target_path = "res://Island/Scenes/H2A.tscn"
+
+[node name="ToH3" type="Area2D" parent="FlagSwitch" index="1"]
+script = ExtResource( 3 )
+target_path = "res://Island/Scenes/H3.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlagSwitch/ToH3" index="0"]
+position = Vector2( 44, -226.75 )
+shape = SubResource( 2 )
+
+[node name="ToH4" type="Area2D" parent="." index="2"]
+script = ExtResource( 3 )
+target_path = "res://Island/Scenes/H4.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ToH4" index="0"]
+position = Vector2( 752, 20 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ToH4" index="1"]
+position = Vector2( 924, -88 )
+shape = SubResource( 4 )
+
+[node name="Granny" type="Area2D" parent="." index="3"]
+script = ExtResource( 6 )
+allow_item = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Granny" index="0"]
+position = Vector2( -388, -44 )
+shape = SubResource( 5 )
+
+[node name="DialogueBubble" parent="Granny" index="1" instance=ExtResource( 5 )]
+visible = false
+margin_left = -296.0
+margin_top = -36.0
+margin_right = -296.0
+margin_bottom = -36.0
+
+[node name="Key" type="Area2D" parent="." index="4"]
+position = Vector2( -56, 364 )
+script = ExtResource( 7 )
+texture = ExtResource( 9 )
+item = ExtResource( 8 )
+
+[connection signal="interact" from="Granny" to="." method="_on_Granny_interact"]

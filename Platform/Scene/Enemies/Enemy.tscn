@@ -33,4 +33,9 @@ collision_mask = 8
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 bus = "SFX"
 
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+process_parent = true
+physics_process_parent = true
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_HurtBox_hurt"]
+[connection signal="viewport_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_viewport_entered"]
